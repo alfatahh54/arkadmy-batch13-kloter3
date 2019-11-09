@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <script src="bootstrap/js/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body onload="muatDaftarData();">
+    <!-- Image and text -->
+    <nav class="navbar shadow">
+        <a class="navbar-brand ml-3" href="javascript:void(0)" onclick="muatDaftarData()">
+            <img src="img/arkademy-01.9c1222ba.png" width="80" height="40" class="d-inline-block align-top" alt="">
+        </a>
+        <a class="navbar-brand mr-1">
+            <h4 class="pink">ARKADEMY</h4>
+        </a>
+        <a class="navbar-brand mr-auto">
+            <h4>COFFEE SHOOP</h4> 
+        </a>
+        <button type="button" class="btn btn-lg btn-pink btn-right mr-3" data-toggle="modal" data-target="#tambah">Add</button>
+    </nav>
+    <div class="container">
+        <div id="list-data" class="well">
+            Tidak ada data...
+        </div>
+    </div>
+    <div class="modal fade" id="tambah" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header modal-borderless">
+                    <h3 class="modal-title">Add</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-data">
+                        <div id="cashier-group" class="form-group">
+                            <label>Cashier:</label> 
+                            <input type="text" class="form-control" id="cashier" name="cashier" ><br/>
+                        </div>
+                        <div id="product-group" class="form-group">
+                            <label>Product:</label> 
+                            <input type="text" class="form-control" id="product" name="product" ><br/>
+                        </div>
+                        <div id="catagory-group" class="form-group">
+                            <label>Catagory:</label> 
+                            <input type="text" class="form-control" id="catagory" name="catagory" /><br/>
+                        </div>
+                        <div id="price-group" class="form-group">
+                            <label>Price:</label> 
+                            <input type="text" class="form-control" id="price" name="price" /><br/>
+                        </div>
+                        <br>
+                        <div class="modal-footer modal-borderless">
+                            <button type="button" onclick="Add();" class="btn btn-pink btn-lg btn-right">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="edit" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header modal-borderless">
+                    <h3 class="modal-title">Edit</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="eform-data">                    
+                        <div id="name-group" class="form-group" style="display:none;">
+                            <label>id data:</label> 
+                            <input type="text" class="form-control" id="eid_data" name="cashier" placeholder="" /><br/>
+                        </div>                            
+                        <div id="cashier-group" class="form-group">
+                            <label>Cashier:</label> 
+                            <input type="text" class="form-control" id="ecashier" name="cashier" /><br/>
+                        </div>
+                        <div id="product-group" class="form-group">
+                            <label>Product:</label> 
+                            <input type="text" class="form-control" id="eproduct" name="product" /><br/>
+                        </div>
+                        <div id="catagory-group" class="form-group">
+                            <label>Catagory:</label> 
+                            <input type="text" class="form-control" id="ecatagory" name="catagory" /><br/>
+                        </div> 
+                        <div id="price-group" class="form-group">
+                            <label>Price:</label> 
+                            <input type="text" class="form-control" id="eprice" name="price" /><br/>
+                        </div>
+                        <div class="modal-footer modal-borderless">
+                            <input type="button" value="Edit" onclick="Edit();" class="btn btn-pink btn-lg btn-right"/>
+                        </div>   
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+ </body>
+ <script type="text/javascript">
+    function muatDaftarData(){
+        if (localStorage.daftar_data && localStorage.id_data){
+        
+            daftar_data = JSON.parse(localStorage.getItem('daftar_data'));
+           
+            var data_app = ""; 
+            
+            if (daftar_data.length > 0){
+                data_app = '<table class="table table-borderless">';
+                data_app += '<thead class="text-center grey">'+
+                                    '<th class="radius1">No</th>'+
+                                    '<th>Cashier</th>'+
+                                    '<th>Product</th>'+
+                                    '<th>Catagory</th>'+
+                                    '<th>Price</th>'+
+                                    '<th class="radius2">Action</th>'+
+                                  '</thead><tbody>';
+                                  
+                for (i in daftar_data){
+                    data_app += '<tr class="text-center">';
+                    data_app += '<td>'+ daftar_data[i].id_data + ' </td>'+
+                                      '<td>'+ daftar_data[i].cashier + ' </td>'+
+                                      '<td>'+ daftar_data[i].product + ' </td>'+
+                                      '<td>'+ daftar_data[i].catagory + ' </td>'+
+                                      '<td>'+ daftar_data[i].price + ' </td>'+
+                                      '<td><a class="hijau" href="javascript:void(0)" onclick="editData(\''+daftar_data[i].id_data+'\')">Edit</a>'+
+                                      ' | '+ '<a class="pink" href="javascript:void(0)" onclick="hapusData(\''+daftar_data[i].id_data+'\')">Hapus</a></td>';
+                    data_app += '</tr>';
+                }
+               data_app += '</tbody></table>';
+           
+            }
+            else {
+                data_app = "Tidak ada data...";
+                localStorage.id_data=0;
+            }
+            
+           $('#list-data').html(data_app);
+           $('#list-data').hide();
+           $('#list-data').fadeIn(100);
+        }
+    }
+    
+    function editData(id){
+    
+        if (localStorage.daftar_data && localStorage.id_data){
+            daftar_data = JSON.parse(localStorage.getItem('daftar_data'));			
+            idx_data = 0;
+            for (i in daftar_data){
+                if (daftar_data[i].id_data == id){
+                    $("#eid_data").val(daftar_data[i].id_data);
+                    $("#ecashier").val(daftar_data[i].cashier);
+                    $("#eproduct").val(daftar_data[i].product);
+                    $("#ecatagory").val(daftar_data[i].catagory);
+                    $("#eprice").val(daftar_data[i].price);
+                    daftar_data.splice(idx_data, 1);
+                }
+                idx_data ++;
+            }
+            $('#edit').modal('show');   
+        }   
+    }
+    function Add(){
+        cashier = $('#cashier').val();
+        product = $('#product').val();
+        catagory = $('#catagory').val();
+        price = $('#price').val();
+        if (localStorage.daftar_data && localStorage.id_data){
+            
+            daftar_data = JSON.parse(localStorage.getItem('daftar_data'));
+            id_data = parseInt(localStorage.getItem('id_data'));
+        }
+        else {
+            daftar_data = [];
+            id_data = 0;
+        }
+        id_data ++;
+        daftar_data.push({'id_data':id_data, 'cashier':cashier, 'product':product, 'catagory':catagory, 'price':price});
+        localStorage.setItem('daftar_data', JSON.stringify(daftar_data));
+        localStorage.setItem('id_data', id_data);
+        document.getElementById('form-data').reset();
+        muatDaftarData();
+        $('#tambah').modal('hide');
+        return false;
+    }
+    
+    function Edit(){
+        id_data = $('#eid_data').val();
+        cashier = $('#ecashier').val();
+        product = $('#eproduct').val();
+        catagory = $('#ecatagory').val();
+        price = $('#eprice').val();
+
+        daftar_data.push({'id_data':id_data, 'cashier':cashier, 'product':product, 'catagory':catagory, 'price':price});
+        localStorage.setItem('daftar_data', JSON.stringify(daftar_data));
+        document.getElementById('eform-data').reset();
+        muatDaftarData();
+        $('#edit').modal('hide');
+        return false;
+    }
+    
+    function hapusData(id){
+        if (localStorage.daftar_data && localStorage.id_data){
+            daftar_data = JSON.parse(localStorage.getItem('daftar_data'));
+            idx_data = 0;
+            for (i in daftar_data){
+                if (daftar_data[i].id_data == id){
+                    daftar_data.splice(idx_data, 1);
+                }
+                idx_data ++;
+            } 
+            localStorage.setItem('daftar_data', JSON.stringify(daftar_data));
+            muatDaftarData();
+        }
+    }
+</script>
+</html>

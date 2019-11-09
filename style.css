@@ -14,12 +14,28 @@
 }
 .radius2{
     background: #CECECE;
-    border-radius: 0px 20px 0px 0px;;
+    border-radius: 0px 20px 0px 0px;
 }
 .grey{
     background: #CECECE;
     color: #FFFF;  
 }
+.hijau{
+    color: #20c997;
+}
 .shadow{
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
+}
+.btn-pink{color:#fff;background-color:#FF8FB2;border-color:#FF8FB2}.btn-pink:hover{color:#fff;background-color:#FF8FB2;border-color:#FF8FB2}.btn-pink.focus,.btn-pink:focus{box-shadow:0 0 0 .2rem rgba(255, 38, 190)}.btn-pink.disabled,.btn-pink:disabled{color:#fff;background-color:#FF8FB2;border-color:#FF8FB2}.btn-pink:not(:disabled):not(.disabled).active,.btn-pink:not(:disabled):not(.disabled):active,.show>.btn-pink.dropdown-toggle{color:#fff;background-color:#FF8FB2;border-color:#FF8FB2}.btn-pink:not(:disabled):not(.disabled).active:focus,.btn-pink:not(:disabled):not(.disabled):active:focus,.show>.btn-pink.dropdown-toggle:focus{box-shadow:0 0 0 .2rem rgb(255, 38, 190)}
+.modal, .modal-dialog .modal-content{
+    border-radius: 20px 20px 20px 20px;
+    padding: 5%;
+}
+.tutup{position:absolute;top:0;right:0;padding:50 px 50 px;color:#FF8FB2; background: #fff; border: none;}
+.modal-borderless{
+    border: none;
+}
+form input[type="text"] {
+    border: none;
+    border-bottom:2px solid #000000;
 }
